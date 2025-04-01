@@ -1,0 +1,23 @@
+{% extends "pests/base.html" %}
+
+{% block title %}About - Mango Pests & Diseases{% endblock %}
+
+{% block content %}
+    <h1>About the Team</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for m in tm %}
+            <tr>
+                <td>{{ m.n }}</td>
+                <td>{{ m.id }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

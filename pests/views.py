@@ -1,18 +1,20 @@
 # pests/views.py
 
 from django.shortcuts import render
-from .pests_data import itms  # Import our list of pest items
+from .pests_data import ITEMS  # Import our list of pest items
 
 def home(request):
     return render(request, 'pests/home.html')
 
 # Renamed function to match the URL config
 def proj_list(request):
-    ctx = {'itms': itms}
-    return render(request, 'pests/project_list.html', ctx)
+    # Pass the list of items to the template context.
+    context = {'itms': ITEMS}
+    return render(request, 'pests/proj_list.html', context)
+
 
 def proj_det(request, pid):
-    itm = next((p for p in itms if str(p.id) == str(pid)), None)
+    itm = next((p for p in ITEMS if str(p.id) == str(pid)), None)
     if not itm:
         return render(request, 'pests/404.html', status=404)
     ctx = {'itm': itm}
@@ -27,3 +29,5 @@ def about(request):
     ]
     ctx = {'tm': tm}
     return render(request, 'pests/about.html', ctx)
+
+

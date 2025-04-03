@@ -1,28 +1,22 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Mango Pests & Diseases{% endblock %}</title>
-    <!-- Link to your static CSS file (if using) -->
+    <link rel="stylesheet" href="{% static 'pests/css/styles.css' %}">
 </head>
 <body>
-    <!-- Common Navigation -->
     <header>
         <nav>
             <a href="{% url 'home' %}">Home</a> |
-            <a href="{% url 'proj_list' %}">Projects</a> |
+            <a href="{% url 'project_list' %}">Projects</a> |
             <a href="{% url 'about' %}">About</a>
-        </nav>
+        </nav>        
     </header>
-
-    <!-- Main Content Area -->
     <main>
-        {% block content %}
-        <!-- Default content if not overridden -->
-        {% endblock %}
+        {% block content %}{% endblock %}
     </main>
-
-    <!-- Common Footer -->
     <footer>
         <p>&copy; 2025 Mango Pests Info</p>
     </footer>

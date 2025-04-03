@@ -1,0 +1,17 @@
+{% extends "pests/base.html" %}
+
+{% block title %}Projects - Mango Pests & Diseases{% endblock %}
+
+{% block content %}
+    <h1>Pest and Disease Projects</h1>
+    <ul>
+        {% for item in itms %}
+            <li>
+                <h2>{{ item.name }}</h2>
+                <p>{{ item.brief_description }}</p>
+                <img src="{{ item.image_url }}" alt="{{ item.name }}" width="200">
+                <p><a href="{% url 'proj_detail' pid=item.id %}">More details</a></p>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

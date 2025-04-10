@@ -3,6 +3,39 @@
 {% block title %}Home - Mango Pests & Diseases{% endblock %}
 
 {% block content %}
-    <h1>Welcome to Mango Pests & Diseases</h1>
-    <p>This portal provides key information on pests and diseases affecting mangoes, enabling growers to keep vigilant surveillance.</p>
+<div class="home-container">
+    <div class="intro">
+        <h2>Welcome to the Mango Pests & Diseases Information Hub</h2>
+        <p>
+            Discover information on pests and diseases affecting mango crops.
+            Use the search box below to find detailed insights and management tips.
+        </p>
+    </div>
+
+    <div class="search-box">
+        <form method="get" action="{% url 'home' %}">
+            <input type="text" name="q" placeholder="Search pests or diseases" value="{{ query|default:'' }}">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    {% if query %}
+        <div class="search-results">
+            <h3>Results for "{{ query }}"</h3>
+            {% if items %}
+                <ul>
+                    {% for item in items %}
+                    <li>
+                        <h4>{{ item.name }}</h4>
+                        <p>{{ item.brief_description }}</p>
+                        <a class="details-btn" href="{% url 'proj_detail' pid=item.id %}">More details</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No results found.</p>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
 {% endblock %}

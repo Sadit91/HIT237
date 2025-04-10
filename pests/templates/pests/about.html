@@ -3,21 +3,26 @@
 {% block title %}About - Mango Pests & Diseases{% endblock %}
 
 {% block content %}
-    <h1>About the Team</h1>
-    <table border="1">
+  <div class="about-container">
+    <h2>About Our Team</h2>
+    <p>
+      We are a dedicated group of researchers and students providing information to help manage mango pests and diseases.
+    </p>
+    <table class="team-table">
         <thead>
-            <tr>
-                <th>Name</th>
-                <th>ID</th>
-            </tr>
+          <tr>
+            <th>Name</th>
+            <th>Student ID</th>
+          </tr>
         </thead>
         <tbody>
-            {% for m in tm %}
+          {% for member in tm %}
             <tr>
-                <td>{{ m.n }}</td>
-                <td>{{ m.id }}</td>
+              <td>{{ member.n }}</td>
+              <td>{{ member.student_id }}</td>
             </tr>
-            {% endfor %}
+          {% endfor %}
         </tbody>
-    </table>
+      </table>      
+  </div>
 {% endblock %}

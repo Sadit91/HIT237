@@ -3,22 +3,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Mango Pests & Diseases{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'pests/css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="{% url 'home' %}">Home</a> |
-            <a href="{% url 'project_list' %}">Projects</a> |
-            <a href="{% url 'about' %}">About</a>
-        </nav>        
+    <header class="site-header">
+        <div class="header-content">
+            <div class="logo">
+                <h1>Mango Pests</h1>
+            </div>
+            <nav class="top-nav">
+                <a href="{% url 'home' %}">Home</a>
+                <a href="{% url 'project_list' %}">Projects</a>
+                <a href="{% url 'about' %}">About</a>
+            </nav>
+        </div>
     </header>
-    <main>
+    <main class="site-main">
         {% block content %}{% endblock %}
     </main>
-    <footer>
-        <p>&copy; 2025 Mango Pests Info</p>
-    </footer>
 </body>
 </html>

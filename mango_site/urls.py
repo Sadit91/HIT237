@@ -23,3 +23,4 @@ urlpatterns = [
     path('pests/', include('pests.urls')),
     path('', RedirectView.as_view(url='/pests/')),  # Redirect root URL to /pests/
 ]
+handler404 = "pests.views.custom_404"

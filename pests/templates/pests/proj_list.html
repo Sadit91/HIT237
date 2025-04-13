@@ -6,6 +6,14 @@
   <div class="projects-container">
     <h2>Pest and Disease Projects</h2>
     <p>Explore detailed information on common pests and diseases affecting mangoes.</p>
+    <form method="get" class="filter-form" style="margin-bottom: 30px; text-align: center;">
+      <label for="type">Filter:</label>
+      <select name="type" id="type" onchange="this.form.submit()">
+        <option value="" {% if not ftype %}selected{% endif %}>All</option>
+        <option value="pest" {% if ftype == 'pest' %}selected{% endif %}>Pest</option>
+        <option value="disease" {% if ftype == 'disease' %}selected{% endif %}>Disease</option>
+      </select>
+    </form>
     <div class="projects-grid">
       {% for item in itms %}
         <div class="project-card">

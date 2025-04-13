@@ -7,18 +7,20 @@
   <h1>{{ itm.name }}</h1>
   <img src="{{ itm.image_url }}" alt="{{ itm.name }}" class="detail-image">
 
-  <p><strong>Short Description:</strong> {{ itm.brief_description }}</p>
-  <p><strong>Detailed Information:</strong> {{ itm.details }}</p>
-
-  {% if itm.severity %}
-      <p><strong>Disease Severity:</strong> {{ itm.severity }}</p>
-  {% endif %}
-  
-  {% if itm.infestation_rate %}
+  <div class="detail-content">
+    <p><strong>Description:</strong> {{ itm.brief_description }}</p>
+    <p><strong>Details:</strong> {{ itm.details }}</p>
+    <p><strong>Impact:</strong> {{ itm.impact }}</p>
+    {% if itm.severity %}
+      <p><strong>Severity:</strong> {{ itm.severity }}</p>
+    {% endif %}
+    {% if itm.infestation_rate %}
       <p><strong>Infestation Rate:</strong> {{ itm.infestation_rate }}</p>
-  {% endif %}
-  
-    <a class="details-btn" href="{% url 'home' %}">Back to Home</a>
-    <a class="details-btn" href="{% url 'project_list' %}">View Projects</a>
+    {% endif %}
+    <p><strong>Prevention & Control:</strong> {{ itm.control }}</p>
   </div>
+
+  <a class="details-btn" href="{% url 'home' %}">Back to Home</a>
+  <a class="details-btn" href="{% url 'project_list' %}">View Projects</a>
+</div>
 {% endblock %}

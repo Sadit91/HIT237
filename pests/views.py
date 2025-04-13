@@ -1,7 +1,13 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from .pests_data import ITEMS  # Import our list of pest items
+from .pests_data import ITEMS, ip, f_d01  # Import our list of pest items
 from django.http import Http404
+from django.shortcuts import render
+from django.shortcuts import get_object_or_404
+
+
+def custom_404(request, exception):
+    return render(request, "pests/404.html", status=404)
 
 def home(request):
     # Retrieve the search term from GET parameters
@@ -25,28 +31,33 @@ def home(request):
 # Project List View (ListView)
 
 class pro_list(ListView):
-    template_name = "pests/proj_list.html"  # Template to use
-    context_object_name = "itms"  # Name of the context variable to use in the template
+    template_name = "pests/proj_list.html"
+    context_object_name = "itms"
 
     def get_queryset(self):
-        """Return the list of pest/disease items."""
-        return ITEMS  # Return the global ITEMS list
+        ftype = self.request.GET.get("type", "")
+        if ftype == "pest":
+            return [i for i in ITEMS if isinstance(i, ip)]
+        elif ftype == "disease":
+            return [i for i in ITEMS if isinstance(i, f_d01)]
+        return ITEMS
 
-# Project Detail View (DetailView)
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx["ftype"] = self.request.GET.get("type", "")
+        return ctx
 
+# DetailView for each pest/disease item
 class pro_det(DetailView):
-    template_name = "pests/project_detail.html"  # Same shit as above for Project Detail
-    context_object_name = "itm" 
+    template_name = "pests/project_detail.html"
+    context_object_name = "itm"
 
     def get_object(self):
-        """Retrieve the project item by 'pid'."""
-        pid = self.kwargs.get("pid")  # Capture 'pid' from URL
-        # If there's a slug (e.g., '123-item-name'), just take the numeric part
-        pid = str(pid).split("-")[0]  # Extract numeric part from pid string
-        # Search for the item in the global ITEMS list
-        itm = next((p for p in ITEMS if str(p.id) == pid), None)
-        if itm is None:
-            raise Http404(f"No project found with id {pid}")  # Return 404 if not found
+        pid = self.kwargs.get("pid")
+        pid = self.kwargs.get("pid")
+        itm = next((i for i in ITEMS if str(i.id) == str(pid)), None)
+        if not itm:
+            raise Http404("Item not found")
         return itm
 
 

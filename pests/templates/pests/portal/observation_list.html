@@ -1,0 +1,19 @@
+{% extends "pests/base.html" %}
+{% block content %}
+<h2>Observations</h2>
+<a href="{% url 'observation_add' %}">➕ Add New Observation</a>
+<ul>
+  {% for observation in observations %}
+    <li>
+      <strong>{{ observation.plant_part.name }}</strong><br>
+      {% if observation.pest %}Pest: {{ observation.pest.name }}<br>{% endif %}
+      {% if observation.disease %}Disease: {{ observation.disease.name }}<br>{% endif %}
+      Result: {{ observation.result }}<br>
+      <a href="{% url 'observation_edit' observation.pk %}">✏️ Edit</a> |
+      <a href="{% url 'observation_delete' observation.pk %}">🗑️ Delete</a>
+    </li>
+  {% empty %}
+    <li>No observations yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
